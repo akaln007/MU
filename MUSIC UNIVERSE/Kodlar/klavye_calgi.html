@@ -1,0 +1,406 @@
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Universe</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #b22222;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            font-size: 3rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffcccc;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+        .dropdown-panel {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            z-index: 10;
+            display: none;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        nav ul li:hover .dropdown-panel {
+            display: block;
+        }
+        .sub-dropdown-panel {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+        }
+        .yayli-calgilar:hover .yayli-panel {
+            display: block;
+        }
+        .nefesli-calgilar:hover .nefesli-panel {
+            display: block;
+        }
+        .vurmalı-calgilar:hover .vurmalı-panel {
+            display: block;
+        }
+        .telli-calgilar:hover .telli-panel {
+            display: block;
+        }
+        .klavye-calgilar:hover .klavye-panel {
+            display: block;
+        }
+        .sub-dropdown-panel a {
+            display: block;
+            text-decoration: none;
+            color: #ff0000;
+            padding: 10px;
+            font-size: 1rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sub-dropdown-panel a:hover {
+            background-color: #ffcccc;
+            color: white;
+        }
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-container input {
+            padding: 12px 20px 12px 40px;
+            font-size: 1rem;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container input:focus {
+            width: 300px;
+            border-color: #b22222;
+            box-shadow: 0 6px 10px rgba(178, 34, 34, 0.2);
+        }
+
+        .search-container button {
+            position: absolute;
+            left: 10px;
+            background: none;
+            border: none;
+            color: #b22222;
+            font-size: 1.2rem;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-container button:hover {
+            color: #ff4d4d;
+        }
+
+        .search-container button i {
+            font-size: 1.2rem;
+        }
+        .intro {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro h2 {
+            text-align: center;
+            color: #b22222;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .intro p span {
+            font-weight: bold;
+            color: #b22222;
+        }
+
+        .instrument-list {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 40px 0;
+        }
+
+        .instrument-card {
+            border: 2px solid #ff4d4d;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .instrument-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 77, 77, 0.3);
+        }
+
+        .instrument-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .instrument-card h3 {
+            font-size: 1.6rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .instrument-card p {
+            font-size: 1rem;
+            color: #666;
+            padding: 0 15px;
+            margin-bottom: 15px;
+        }
+
+        .instrument-card button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .instrument-card button:hover {
+            background-color: #b22222;
+        }
+
+
+        footer {
+            background-color: #b22222;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <img src="banner1.png" alt="Müzik Evreni" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+            <nav>
+                <ul style="list-style: none; display: flex; margin: 0; padding: 0;">
+                    <li style="margin: 0 15px;">
+                        <a href="mark001.html">Ana Sayfa</a>
+                    </li>
+                    <li style="margin: 0 15px;">
+                        <a href="#">Hakkımızda</a>
+                    </li>
+                    <li style="margin: 0 15px;">
+                        <a href="#">Müzik Aletleri</a>
+                        <div class="dropdown-panel">
+                            <div class="dropdown-item yayli-calgilar">
+                                <a href="yayli_calgi.html">o Yaylı Çalgılar</a>
+                                <div class="sub-dropdown-panel yayli-panel">
+                                    <a href="#">Keman</a>
+                                    <a href="#">Çello</a>
+                                    <a href="#">Kontrabas</a>
+                                    <a href="#">Viyola</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item nefesli-calgilar">
+                                <a href="nefesli_calgi.html">o Nefesli Çalgılar</a>
+                                <div class="sub-dropdown-panel nefesli-panel">
+                                    <a href="#">Trompet</a>
+                                    <a href="#">Trombon</a>
+                                    <a href="#">Blokflüt</a>
+                                    <a href="#">Saksafon</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item vurmalı-calgilar">
+                                <a href="vurmali_calgi.html">o Vurmalı Çalgılar</a>
+                                <div class="sub-dropdown-panel vurmalı-panel">
+                                    <a href="#">Davul</a>
+                                    <a href="#">Zil</a>
+                                    <a href="#">Tef</a>
+                                    <a href="#">Kongalar</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item telli-calgilar">
+                                <a href="telli_calgi.html">o Telli Çalgılar</a>
+                                <div class="sub-dropdown-panel telli-panel">
+                                    <a href="#">Gitar</a>
+                                    <a href="#">Bağlama</a>
+                                    <a href="#">Mandolin</a>
+                                    <a href="#">Ukulele</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item klavye-calgilar">
+                                <a href="klavye_calgi.html">o Klavye Çalgıları</a>
+                                <div class="sub-dropdown-panel klavye-panel">
+                                    <a href="#">Piyano</a>
+                                    <a href="#">Org</a>
+                                    <a href="#">Synthesizer</a>
+                                    <a href="#">Akordeon</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="margin: 0 15px;">
+                        <a href="#">İletişim</a>
+                    </li>
+                </ul>
+                <div class="search-container">
+                    <button><i class="fa fa-search"></i></button>
+                    <input type="text" id="searchInput" placeholder="Müzik aleti ara...">
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="intro">
+        <h2>Klavye Çalgıları</h2>
+        <p>Klavye çalgıları, tuşlarla çalınan müzik aletleri olarak geniş bir yelpazeye yayılmaktadır. Genellikle, bir dizi tuşun (genellikle beyaz ve siyah) ardışık olarak düzenlendiği ve bu tuşlara basıldığında mekanik veya elektronik bir sistem aracılığıyla ses üretilen enstrümanlar olarak tanımlanır. Klavye çalgıları, orkestralarda, solo performanslarda ve popüler müzikte önemli bir rol oynar.</p>
+    </section>
+
+    <section class="intro">
+        <h2>Klavye Çalgılarının Tarihçesi:</h2>
+        <p>Klavye çalgılarının tarihi, yaklaşık 2.000 yıl öncesine dayanır. Bu çalgıların evrimi, ilk başlarda mekanik sistemlerin gelişmesi ve daha sonra elektronik teknolojinin katkılarıyla hız kazanmıştır.</p>
+        <p>1. Antik Yunan ve Roma (MÖ 300 - MÖ 500): Antik dönemdeki ilk klavye çalgıları, su organı (Hydraulis) gibi mekanik enstrümanlarla ilişkilendirilir. Hydraulis, suyun basıncıyla hava üflemesi yapan bir borulu enstrümandı. Bu, klavye çalgılarının ilk formalarından biriydi.</p>
+        <p>2. Orta Çağ (500 - 1400): Orta Çağ boyunca organlar, kiliselerde en yaygın kullanılan klavye çalgılarıydı. Bu dönemde, organlar, büyük çoğunlukla kilise törenlerinde kullanılan devasa mekanik yapılar haline gelmişti. Müzik, genellikle dini ritüellerde kullanılmakta olup, orkestral bir yapıya bürünmüyordu.</p>
+        <p>3. Rönesans ve Barok Dönemi (1400 - 1750): Rönesans ve Barok dönemlerinde organlar, Avrupa'daki kiliselerde önemli bir müzik aracıydı. Bu dönemde, klavsen ve klavikord gibi tuşlu çalgılar da popülerlik kazandı. Klavsen, harfli tuşlara sahip olup, yaylı bir enstrümandı, tuşlara basıldıkça yaylı çalgılara benzer şekilde ses çıkarıyordu.</p>
+        <p>4. Klasik Dönem (1750 - 1820): Piyanonun modern anlamda evrimi, 1700'lerin sonlarına doğru İtalyan marangozu Bartolomeo Cristofori'nin buluşuyla başladı. Cristofori, ilk kez bir çekiç mekanizması geliştirdi ve tuşlara basıldığında sesin tınısını değiştirebilen bir enstrüman üretti. Bu, piyanonun atasıydı ve zamanla, hem yaylı hem de tuşlu çalgıların özelliklerini taşıyan modern piyano ortaya çıktı.</p>
+        <p>5. Romantik Dönem (1820 - 1900): 19. yüzyılda piyano, gelişen sanayi devrimiyle birlikte daha da evrildi. Fabrikaların etkisiyle üretim hızlandı, bu da piyano sayısının artmasına neden oldu. Piyanoların yanı sıra, orkestralarda org ve diğer tuşlu çalgılar da önemli bir yer tutmaya devam etti.</p>
+        <p>6.Modern Dönem (1900 - Günümüz): 20. yüzyılın başlarında, elektromanyetik organlar ve synthesizer'lar gibi yenilikçi elektronik cihazlar geliştirilmiştir. 1950'lerde, elektrikli piyanoların ve ilk synthesizer'ların icadıyla, yeni türler ve modern müzikte devrim yapılmıştır. Synthesizer'lar, 1970'lerde popülerleşmiş ve rock, pop, caz gibi türlerde geniş bir kullanım alanı bulmuştur.</p>
+        <p>Bugün, dijital teknolojilerin katkılarıyla klavye çalgıları çok daha zengin ve çeşitli ses seçenekleri sunmaktadır. Elektronik piyanolar, synthesizer'lar, dijital orglar ve hatta akordeonlar, müzik prodüksiyonundan sahne performanslarına kadar pek çok alanda kullanılmaktadır.</p>
+        <p>Klavye çalgılarının tarihi, müziği dönüştürme kapasitesine sahip olan sürekli gelişen bir süreçtir ve modern müzik sahnesinde büyük bir öneme sahiptir.</p>
+    </section>
+
+    <section class="intro">
+        <h2>Popüler Klavye Çalgıları</h2>
+        <p>Piyano: Piyano, dünyadaki en popüler ve yaygın klavye çalgısıdır. 88 tuşu vardır (52 beyaz, 36 siyah) ve ses, tuşlara basıldığında içindeki çekiçlerin tellere vurmasıyla üretilir. Hem klasik hem de modern müzikte yaygın olarak kullanılır. Piyano, melodik ve armonik olarak çok çeşitli görevleri yerine getirebilir.</p>
+        <p>Org: Org, kilise müzikleri ve klasik müzikte önemli bir yer tutar. Organlar, hava akışının bir dizi boruya yönlendirilmesiyle ses üretir. Org, klavye çalgıları arasında en zengin ses paletine sahip olanlardan biridir ve genellikle büyük yapılarla ilişkilidir.</p>
+        <p>Sintezleyici (Synthesizer): Elektronik bir klavye çalgısı olan synthesizer, dijital veya analog teknolojiler kullanarak sesleri oluşturur. Çeşitli ses efektleri ve ses manipülasyonları yapabilme yeteneğiyle modern müziklerde, özellikle popüler müzik, elektronik müzik ve film müziklerinde yaygın olarak kullanılır.</p>
+        <p>Marakas: Genellikle Latin ve Afrika kökenli müziklerde duyulabilen bu çalgı, sallama yoluyla ses çıkarır.</p>
+        <p>Akordeon: Akordeon, tuşlu bir çalgıdır ancak ses üretimi, hava akışının bir dizi yastık ve kanaldan geçirilmesiyle yapılır. Geleneksel olarak halk müziği, dans müziği ve bazı klasik müzik parçalarında kullanılır. Akordeon, hem tuşlar hem de akordeon kolu ile çalınır.</p>
+    </section>
+
+    <section class="instrument-list" id="instrumentList">
+        <div class="instrument-card">
+            <img src="piyano.jpg" alt="Piyano" class="instrument-image">
+            <h3>Piyano</h3>
+            <p>Piyano, İtalya'da Bartolomeo Cristofori tarafından 1700 yılı civarında icat edilmiş (tam olarak yıl belirsizdir) akustik, tuşlu bir müzik aletidir</p><br>
+            <button onclick="redirectToDetails('piyano.html')">Detayları Göster</button>
+        </div>
+        <div class="instrument-card">
+            <img src="org.jpg" alt="Org" class="instrument-image">
+            <h3>Org</h3>
+            <p>Org, bir veya daha fazla boru bölümünden veya ton üretmek için başka araçlardan oluşan klavyeli bir enstrümandır.</p><br><br>
+            <button onclick="redirectToDetails('org.html')">Detayları Göster</button>
+        </div>
+        <div class="instrument-card">
+            <img src="sintezleyici.jpg" alt="Sintezleyici" class="instrument-image">
+            <h3>Sintezleyici (Synthesizer)</h3>
+            <p>Synthesizer, farklı türde bir müzik yaratmak ve elektriksel sinyaller üretmek için kullanılan bir müzik aletidir</p>
+            <button onclick="redirectToDetails('sintezleyici.html')">Detayları Göster</button>
+        </div>
+        <div class="instrument-card">
+            <img src="akordeon.jfif" alt="Akordeon" class="instrument-image">
+            <h3>Akordeon</h3>
+            <p>Akordeon, bir körüğü harekete geçirmekle yaratılan hava akımının etkilediği serbest metal dillerinin titreşmesiyle ses çıkaran havalı çalgıdır.</p><br>
+            <button onclick="redirectToDetails('akordeon.html')">Detayları Göster</button>
+        </div>
+    </section>
+    
+    <script>
+        function redirectToDetails(url) {
+            window.location.href = url;
+        }
+        function searchInstrument() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const instrumentCards = document.querySelectorAll(".instrument-card");
+            instrumentCards.forEach(card => {
+                const instrumentName = card.querySelector("h3").textContent.toLowerCase();
+                if (instrumentName.includes(searchInput)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+        }
+    </script>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Müzik Evreni. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Universe</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #b22222;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            font-size: 3rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffcccc;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+        .dropdown-panel {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            z-index: 10;
+            display: none;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        nav ul li:hover .dropdown-panel {
+            display: block;
+        }
+        .sub-dropdown-panel {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+        }
+        .yayli-calgilar:hover .yayli-panel {
+            display: block;
+        }
+        .nefesli-calgilar:hover .nefesli-panel {
+            display: block;
+        }
+        .vurmalı-calgilar:hover .vurmalı-panel {
+            display: block;
+        }
+        .telli-calgilar:hover .telli-panel {
+            display: block;
+        }
+        .klavye-calgilar:hover .klavye-panel {
+            display: block;
+        }
+        .sub-dropdown-panel a {
+            display: block;
+            text-decoration: none;
+            color: #ff0000;
+            padding: 10px;
+            font-size: 1rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sub-dropdown-panel a:hover {
+            background-color: #ffcccc;
+            color: white;
+        }
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-container input {
+            padding: 12px 20px 12px 40px;
+            font-size: 1rem;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container input:focus {
+            width: 300px;
+            border-color: #b22222;
+            box-shadow: 0 6px 10px rgba(178, 34, 34, 0.2);
+        }
+
+        .search-container button {
+            position: absolute;
+            left: 10px;
+            background: none;
+            border: none;
+            color: #b22222;
+            font-size: 1.2rem;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-container button:hover {
+            color: #ff4d4d;
+        }
+
+        .search-container button i {
+            font-size: 1.2rem;
+        }
+        .intro {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro h2 {
+            text-align: center;
+            color: #b22222;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .intro p span {
+            font-weight: bold;
+            color: #b22222;
+        }
+
+        .instrument-list {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 40px 0;
+        }
+
+        .instrument-card {
+            border: 2px solid #ff4d4d;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .instrument-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 77, 77, 0.3);
+        }
+
+        .instrument-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .instrument-card h3 {
+            font-size: 1.6rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .instrument-card p {
+            font-size: 1rem;
+            color: #666;
+            padding: 0 15px;
+            margin-bottom: 15px;
+        }
+
+        .instrument-card button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .instrument-card button:hover {
+            background-color: #b22222;
+        }
+
+
+        footer {
+            background-color: #b22222;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <img src="banner1.png" alt="Müzik Evreni" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+            <nav>
+                <ul style="list-style: none; display: flex; margin: 0; padding: 0;">
+                    <li style="margin: 0 15px;">
+                        <a href="mark001.html">Ana Sayfa</a>
+                    </li>
+                    <li style="margin: 0 15px;">
+                        <a href="#">Hakkımızda</a>
+                    </li>
+                    <li style="margin: 0 15px;">
+                        <a href="#">Müzik Aletleri</a>
+                        <div class="dropdown-panel">
+                            <div class="dropdown-item yayli-calgilar">
+                                <a href="yayli_calgi.html">o Yaylı Çalgılar</a>
+                                <div class="sub-dropdown-panel yayli-panel">
+                                    <a href="#">Keman</a>
+                                    <a href="#">Çello</a>
+                                    <a href="#">Kontrabas</a>
+                                    <a href="#">Viyola</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item nefesli-calgilar">
+                                <a href="nefesli_calgi.html">o Nefesli Çalgılar</a>
+                                <div class="sub-dropdown-panel nefesli-panel">
+                                    <a href="#">Trompet</a>
+                                    <a href="#">Trombon</a>
+                                    <a href="#">Blokflüt</a>
+                                    <a href="#">Saksafon</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item vurmalı-calgilar">
+                                <a href="vurmali_calgi.html">o Vurmalı Çalgılar</a>
+                                <div class="sub-dropdown-panel vurmalı-panel">
+                                    <a href="#">Davul</a>
+                                    <a href="#">Zil</a>
+                                    <a href="#">Tef</a>
+                                    <a href="#">Kongalar</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item telli-calgilar">
+                                <a href="telli_calgi.html">o Telli Çalgılar</a>
+                                <div class="sub-dropdown-panel telli-panel">
+                                    <a href="#">Gitar</a>
+                                    <a href="#">Bağlama</a>
+                                    <a href="#">Mandolin</a>
+                                    <a href="#">Ukulele</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item klavye-calgilar">
+                                <a href="klavye_calgi.html">o Klavye Çalgıları</a>
+                                <div class="sub-dropdown-panel klavye-panel">
+                                    <a href="#">Piyano</a>
+                                    <a href="#">Org</a>
+                                    <a href="#">Synthesizer</a>
+                                    <a href="#">Akordeon</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="margin: 0 15px;">
+                        <a href="#">İletişim</a>
+                    </li>
+                </ul>
+                <div class="search-container">
+                    <button><i class="fa fa-search"></i></button>
+                    <input type="text" id="searchInput" placeholder="Müzik aleti ara...">
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="intro">
+        <h2>Vurmalı Çalgılar</h2>
+        <p>Vurmalı çalgılar, ses çıkaran bir yüzeye (genellikle deriye veya metal gibi malzemelere) vurma, çalma ya da çalkalama yoluyla ses üreten müzik aletleridir. Müzik yapısında ritmi ve zamanı belirlemek için sıklıkla kullanılan bu çalgılar, insan sesinden sonra en eski müzik aleti türleri arasında yer alır.</p>
+        <p>Vurmalı Çalgıların Temel Özellikleri:</p>
+        <p>-Ses Üretimi: Vurmalı çalgılar, çalınırken yüzeye vurma veya sürtme işlemiyle ses üretirler. Çalınan yüzeyin malzemesi, büyüklüğü ve yapısı sesin tonunu ve özelliklerini etkiler.</p>
+        <p>Ritim: Bu çalgılar, özellikle ritim ve zaman ölçüsü oluşturmak için kullanılır. Vurmalı çalgılar, çoğu zaman orkestrasyonun ritmik temelini atar ve müziğin zaman dilimlerine uygun şekilde çalınır.</p>
+        <p>Çeşitli Çalgı Türleri: Vurmalı çalgılar, genellikle iki ana grupta sınıflandırılır:</p>
+        <p>-Gerçek Vurmalı Çalgılar: Davullar, bongolar, darbuka gibi çalgılar bu kategoriye girer. Çalınırken doğrudan vurma veya çarpma ile ses elde edilir.</p>
+        <p>-Çalkalama Çalgıları: Marakas gibi çalgılar, sallama veya çalkalama yoluyla ses çıkaran aletlerdir.</p>
+    </section>
+
+    <section class="intro">
+        <h2>Vurmalı Çalgıların Tarihçesi</h2>
+        <p>Vurmalı çalgılar, tarih boyunca farklı kültürlerde önemli bir rol oynamıştır. İnsanlık tarihi kadar eski olan bu çalgılar, ilk zamanlardan itibaren ritmik ve işaret amaçlı kullanılmıştır.</p>
+        <p>İlk Kullanımlar</p>
+        <p>Vurmalı çalgıların tarihçesi, yazılı tarihten önceki döneme kadar uzanır. İlk müzik aletleri taşlardan, kemiklerden ve doğada bulunan diğer malzemelerden yapılmıştı. Bu erken dönemlerde insanlar, avlanma sırasında veya dini törenlerde sesler çıkarmak için taşları ve ağaçları kullanıyorlardı.</p>
+        <p>Antik Medeniyetler</p>
+        <p>Antik Mısır, Mezopotamya ve Yunanistan gibi medeniyetlerde de vurmalı çalgılara dair izler bulunmaktadır. Mısır'da özellikle davullar ve zil gibi çalgılar dini törenlerde kullanılmıştır. Antik Yunan'da ise kymbalon adı verilen zil benzeri çalgılar, orkestra müziğinde önemli bir yer tutmuştur.</p>
+        <p>Orta Çağ ve Rönesans</p>
+        <p>Orta Çağ'da vurmalı çalgılar, savaşlarda ve toplumsal etkinliklerde sıklıkla kullanılıyordu. Davullar, askerlerin koordinasyonunu sağlamak amacıyla önemli bir rol üstlenmişti. Rönesans döneminde, müzikteki gelişmeler ve orkestraların yaygınlaşmasıyla birlikte vurmalı çalgılar da orkestral yapılar içinde yer almaya başlamıştır.</p>
+        <p>Modern Dönem</p>
+        <p>Modern dönemde, vurmalı çalgılar farklı türlerde ve çeşitlerde geliştirilmiştir. 19. yüzyılın sonlarından itibaren, batı orkestrasında yaygın olarak yer alan davul setleri, marakaslar, ksilofonlar ve diğer vurmalı çalgılar, müziğin temel bileşenlerinden biri haline gelmiştir. Bugün, vurmalı çalgılar sadece klasik müzikte değil, popüler müzik, caz ve etnik müzik gibi birçok alanda da yaygın bir şekilde kullanılmaktadır.</p>
+    </section>
+
+    <section class="intro">
+        <h2>Popüler Vurmalı Çalgılar</h2>
+        <p>Davul (Drum): Batı müziğinin en temel vurmalı çalgılarından biridir. Farklı boyutlarda ve çeşitlerde bulunur, her biri farklı ses tonları üretir. Bateri seti, davullar, ziller ve diğer perküsyon aletlerinin bir araya geldiği bir çalgı setidir.</p>
+        <p>Darbuka (Dumbek): Ortadoğu ve Akdeniz bölgelerinde yaygın olarak kullanılan bu çalgı, özellikle ritim tutma amacıyla çok tercih edilir.</p>
+        <p>Bongo ve Konga: Latin müziğinde sıkça rastlanan iki farklı vurmalı çalgıdır. Her ikisi de farklı büyüklüklerde olup, parmaklarla veya ellerle çalınır.</p>
+        <p>Marakas: Genellikle Latin ve Afrika kökenli müziklerde duyulabilen bu çalgı, sallama yoluyla ses çıkarır.</p>
+        <p>Zil: Çeşitli boyutlarda ve şekillerde bulunan zil, genellikle orkestralarda ya da çello, davul gibi çalgılarla birlikte kullanılır.</p>
+    </section>
+
+    <section class="instrument-list" id="instrumentList">
+        <div class="instrument-card">
+            <img src="darbuka.jpg" alt="Darbuka" class="instrument-image">
+            <h3>Darbuka</h3>
+            <p>Darbuka, özellikle Orta Doğu ve Akdeniz bölgelerinde yaygın olarak çalınan bir vurmalı çalgıdır.</p>
+            <button onclick="redirectToDetails('darbuka.html')">Detayları Göster</button>
+        </div>
+        <div class="instrument-card">
+            <img src="bongo.jpg" alt="Bongo" class="instrument-image">
+            <h3>Bongo</h3>
+            <p>Bongo, Latin müziğiyle özdeşleşmiş bir vurmalı çalgıdır.</p><br>
+            <button onclick="redirectToDetails('bongo.html')">Detayları Göster</button>
+        </div>
+        <div class="instrument-card">
+            <img src="konga.jpg" alt="Konga" class="instrument-image">
+            <h3>Konga</h3>
+            <p>Konga, Latin müziğinin vazgeçilmez vurmalı çalgılarından biridir.</p><br>
+            <button onclick="redirectToDetails('konga.html')">Detayları Göster</button>
+        </div>
+        <div class="instrument-card">
+            <img src="davul.jpg" alt="Bateri" class="instrument-image">
+            <h3>Bateri</h3>
+            <p>Bateri, davul setlerinden oluşan bir vurmalı çalgıdır.</p><br>
+            <button onclick="redirectToDetails('bateri.html')">Detayları Göster</button>
+        </div>
+    </section>
+    
+    <script>
+        function redirectToDetails(url) {
+            window.location.href = url;
+        }
+        function searchInstrument() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const instrumentCards = document.querySelectorAll(".instrument-card");
+            instrumentCards.forEach(card => {
+                const instrumentName = card.querySelector("h3").textContent.toLowerCase();
+                if (instrumentName.includes(searchInput)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+        }
+    </script>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Müzik Evreni. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+</body>
+</html>

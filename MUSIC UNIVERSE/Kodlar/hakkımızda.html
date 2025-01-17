@@ -1,0 +1,349 @@
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Universe</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:ital,wght@1,300&display=swap" rel="stylesheet">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #b22222;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            font-size: 3rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffcccc;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+        .dropdown-panel {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            z-index: 10;
+            display: none;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        nav ul li:hover .dropdown-panel {
+            display: block;
+        }
+        .sub-dropdown-panel {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+        }
+        .yayli-calgilar:hover .yayli-panel {
+            display: block;
+        }
+        .nefesli-calgilar:hover .nefesli-panel {
+            display: block;
+        }
+        .vurmalı-calgilar:hover .vurmalı-panel {
+            display: block;
+        }
+        .telli-calgilar:hover .telli-panel {
+            display: block;
+        }
+        .klavye-calgilar:hover .klavye-panel {
+            display: block;
+        }
+        .sub-dropdown-panel a {
+            display: block;
+            text-decoration: none;
+            color: #ff0000;
+            padding: 10px;
+            font-size: 1rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sub-dropdown-panel a:hover {
+            background-color: #ffcccc;
+            color: white;
+        }
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-container input {
+            padding: 12px 20px 12px 40px;
+            font-size: 1rem;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container input:focus {
+            width: 300px;
+            border-color: #b22222;
+            box-shadow: 0 6px 10px rgba(178, 34, 34, 0.2);
+        }
+
+        .search-container button {
+            position: absolute;
+            left: 10px;
+            background: none;
+            border: none;
+            color: #b22222;
+            font-size: 1.2rem;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-container button:hover {
+            color: #ff4d4d;
+        }
+
+        .search-container button i {
+            font-size: 1.2rem;
+        }
+
+        section.intro {
+            text-align: center;
+            padding: 40px 0;
+            background-color: white;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        section.intro h2 {
+            font-family: 'Roboto Slab', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 2.5rem;
+            color: #ff0000;
+            margin-bottom: 20px;
+        }
+
+
+
+        section.intro p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .instrument-list {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 40px 0;
+        }
+
+        .instrument-card {
+            border: 2px solid #ff4d4d;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .instrument-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 77, 77, 0.3);
+        }
+
+        .instrument-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .instrument-card h3 {
+            font-size: 1.6rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .instrument-card p {
+            font-size: 1rem;
+            color: #666;
+            padding: 0 15px;
+            margin-bottom: 15px;
+        }
+
+        .instrument-card button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .instrument-card button:hover {
+            background-color: #b22222;
+        }
+
+        footer {
+            background-color: #b22222;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <img src="banner1.png" alt="Müzik Evreni" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+            <nav>
+                <ul style="list-style: none; display: flex; margin: 0; padding: 0;">
+                    <li style="margin: 0 15px;">
+                        <a href="mark001.html">Ana Sayfa</a>
+                    </li>
+                    <li style="margin: 0 15px;">
+                        <a href="#">Hakkımızda</a>
+                    </li>
+                    <li style="margin: 0 15px;">
+                        <a href="#">Müzik Aletleri</a>
+                        <div class="dropdown-panel">
+                            <div class="dropdown-item yayli-calgilar">
+                                <a href="yayli_calgi.html">o Yaylı Çalgılar</a>
+                                <div class="sub-dropdown-panel yayli-panel">
+                                    <a href="#">Keman</a>
+                                    <a href="#">Çello</a>
+                                    <a href="#">Kontrabas</a>
+                                    <a href="#">Viyola</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item nefesli-calgilar">
+                                <a href="nefesli_calgi.html">o Nefesli Çalgılar</a>
+                                <div class="sub-dropdown-panel nefesli-panel">
+                                    <a href="#">Trompet</a>
+                                    <a href="#">Trombon</a>
+                                    <a href="#">Blokflüt</a>
+                                    <a href="#">Saksafon</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item vurmalı-calgilar">
+                                <a href="vurmali_calgi.html">o Vurmalı Çalgılar</a>
+                                <div class="sub-dropdown-panel vurmalı-panel">
+                                    <a href="#">Davul</a>
+                                    <a href="#">Zil</a>
+                                    <a href="#">Tef</a>
+                                    <a href="#">Kongalar</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item telli-calgilar">
+                                <a href="telli_calgi.html">o Telli Çalgılar</a>
+                                <div class="sub-dropdown-panel telli-panel">
+                                    <a href="#">Gitar</a>
+                                    <a href="#">Bağlama</a>
+                                    <a href="#">Mandolin</a>
+                                    <a href="#">Ukulele</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-item klavye-calgilar">
+                                <a href="klavye_calgi.html">o Klavye Çalgıları</a>
+                                <div class="sub-dropdown-panel klavye-panel">
+                                    <a href="#">Piyano</a>
+                                    <a href="#">Org</a>
+                                    <a href="#">Synthesizer</a>
+                                    <a href="#">Akordeon</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="margin: 0 15px;">
+                        <a href="iletisim.html">İletişim</a>
+                    </li>
+                </ul>
+                <div class="search-container">
+                    <button><i class="fa fa-search"></i></button>
+                    <input type="text" id="searchInput" placeholder="Müzik aleti ara...">
+                </div>
+            </nav>
+        </div>
+    </header>
+
+<section class="intro">
+    <h2>Hakkımızda</h2>
+    <p>Müzik Evreni olarak, müziğin ruhu besleyen ve insanları birleştiren eşsiz gücüne inanıyoruz.</p> 
+    <p>Amacımız, müzikle ilgilenen herkesin ihtiyaç duyduğu bilgiye, ilhama ve müzik aletlerine ulaşmasını sağlamak.</p> 
+    <p>Geniş ürün yelpazemiz, detaylı rehber içeriklerimiz ve tutkumuzla, müzikseverlere değer katmayı hedefliyoruz.</p>
+    <p>Misyonumuz: En kaliteli müzik aletlerini tanıtmak ve kullanıcılarımıza doğru bilgilerle rehberlik etmek.</p>
+    <p>Vizyonumuz: Müzikseverler için bir buluşma noktası olarak tüm dünyaya yayılmak.</p>
+</section>
+
+<footer>
+    <p>&copy; 2024 Müzik Evreni. Tüm Hakları Saklıdır.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gitar - Müzik Evreni</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff5f5; /* İlk sitenizin arka plan rengi */
+            color: #333;
+        }
+
+        header {
+            background-color: #b22222; /* İlk sitenizde kullanılan kırmızı renk */
+            color: white;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif; /* Modern font */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        nav ul li a:hover {
+            color: #ffcccc; /* Canlı vurgular */
+        }
+
+        .content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+        }
+
+        .content h2 {
+            font-size: 2.5rem;
+            color: #b22222;
+            text-align: center;
+        }
+
+        .content img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #b22222;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+        }
+
+        .back-button:hover {
+            background-color: #ff4d4d;
+        }
+
+        footer {
+            background-color: #b22222;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <!-- Başlık yerine resim yerleştiriliyor -->
+            <img src="MUSIC UNIVERSE-1.png" alt="Müzik Evreni" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+            <nav style="display: flex; justify-content: space-between; align-items: center;">
+                <ul style="list-style: none; display: flex; margin: 0; padding: 0;">
+                    <li style="margin: 0 15px;"><a href="mark001.html" style="text-decoration: none; color: white; font-size: 1.2rem;">Ana Sayfa</a></li>
+                    <li style="margin: 0 15px;"><a href="#" style="text-decoration: none; color: white; font-size: 1.2rem;">Hakkımızda</a></li>
+                    <li style="margin: 0 15px;"><a href="#" style="text-decoration: none; color: white; font-size: 1.2rem;">Müzik Aletleri</a></li>
+                    <li style="margin: 0 15px;"><a href="#" style="text-decoration: none; color: white; font-size: 1.2rem;">İletişim</a></li>
+                </ul>
+                <div style="display: flex; align-items: center;">
+                    <input type="text" id="searchInput" placeholder="Müzik aleti ara..." 
+                           style="padding: 10px; font-size: 1rem; width: 200px; border-radius: 5px; border: 1px solid #ccc; margin-right: 10px;">
+                    <button onclick="searchInstrument()" 
+                            style="padding: 10px; font-size: 1rem; background-color: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">Ara</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Piyano</h2>
+            <img src="https://via.placeholder.com/800x400?text=Piyano" alt="Piyano">
+            <p>
+                Piyano, tuşlara basılarak çalınan bir müzik aletidir ve tarih boyunca müziğin en önemli çalgılarından biri olmuştur. 
+                Hem solo performanslarda hem de orkestra ve oda müziğinde yaygın bir şekilde kullanılır. 
+                Piyano, modern müzikten klasik müziğe kadar geniş bir repertuara sahiptir.
+            </p>
+            <p>
+                Piyano, genellikle ahşap gövdeye sahip büyük bir enstrümandır ve içerisinde çekiçlerin telleri vurmasıyla ses üretir.
+                Elektronik piyanolar ise dijital teknolojiyi kullanarak benzer bir ses sunar. 
+                Piyanonun öğrenilmesi sabır ve sürekli pratik gerektirir, ancak bu süreç müzik dünyasına açılan büyük bir kapıdır.
+            </p>
+            <a href="mark001.html" class="back-button">Geri Dön</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Müzik Evreni. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        function search() {
+            const query = document.getElementById("searchInput").value;
+            alert("Arama yapıldı: " + query);
+        }
+    </script>
+</body>
+</html>
